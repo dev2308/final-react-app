@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import { Avatar, Button, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import {Avatar, Button, FormControlLabel, Radio, RadioGroup,} from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,8 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: 8,
     },
     image: {
-      width: 128,
-      height: 128,
+      width: 108,
+      height: 108,
+      marginRight: 15,
     },
     img: {
       margin: "auto",
@@ -31,18 +32,21 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ImageCard(prop: any) {
   const classes = useStyles();
-  const {
-      data={},
-      onChipTypeChange
-  } = prop;
-  
+
+  const { data = {}, onChipTypeChange, region, costEstimator } = prop;
+
   const {
     id = 1,
     imageTitle = "Linux Server 18.0",
     description = "Description",
     chipOptions = ["64-bit(x86)", "64-bit(ARM)"],
-    
+    isWindows = false,
   } = data;
+
+  function onImageSelect(data:any){
+    console.log(data);
+    costEstimator(data);
+  }
 
   return (
     <div className={classes.root}>
@@ -59,10 +63,10 @@ export default function ImageCard(prop: any) {
           <Grid item xs container>
             <Grid item xs={9} container direction="column" spacing={2}>
               <Grid item xs>
-                <Typography gutterBottom variant="subtitle1">
+                <Typography gutterBottom align="left" variant="h4">
                   {imageTitle}
                 </Typography>
-                <Typography variant="body2" gutterBottom>
+                <Typography align="left" variant="body1" gutterBottom>
                   {description}
                 </Typography>
               </Grid>
@@ -79,14 +83,20 @@ export default function ImageCard(prop: any) {
                     <div>
                       <FormControlLabel
                         value={item}
-                        control={<Radio />}
+                        control={<Radio color="primary"/>}
                         label={item}
                       />
                     </div>
                   );
                 })}
               </RadioGroup>
-              <Button variant="contained" color="primary">
+              <Button
+                size="medium"
+                variant="contained"
+                disabled={region == "ap-south-1" && isWindows ? true : false}
+                color="primary"
+                onClick={()=>{onImageSelect({data})}}
+              >
                 Select
               </Button>
             </Grid>
@@ -96,11 +106,3 @@ export default function ImageCard(prop: any) {
     </div>
   );
 }
-
-// {
-//     id: 1,
-//     imageTitle: "Linux Server 18.0",
-//     description: "Description",
-//     cost: "200$/hour",
-//     chipOptions: ["64-bit(x86)", "64-bit(ARM)"],
-//   }

@@ -7,65 +7,43 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  
   /* header base */
 
-width: 1292px;
-left: 0px;
-top: 0px;
-align-items: center;
-text-align: center;
-justify-content: center;
-background: #FFFFFF;
-font-size: 30px;
-font-weight: 600;
-display: flex;
-padding-top: 12px;
-padding-bottom: 12px;
+  width: 1425px;
+  left: 0px;
+  top: 0px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background: #ffffff;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-family: Montserrat;
 
-box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
-
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 .App-link {
   color: #61dafb;
 }
 
-.parentContainer{
-
-  width: 100%;
-  display: flex;
-}
-
-.componentContainer{
-
-  width: 70%;
-  height: 200px;
-  display: flex;
-  margin-top: 46px;
-  align-items: flex-start;
-}
-
-.costContainer{
+.costContainer {
   width: 30%;
   height: 200px;
   border: 1px solild black;
 }
 
-.titleContainer{
-width: 100%;
-display: flex;
-justify-content: space-between;
-
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
-.title{
+
+.title {
   width: 70%;
   font-style: normal;
   font-weight: 500;
@@ -73,17 +51,80 @@ justify-content: space-between;
   line-height: 54px;
 }
 
-.dropdown{
-  width:30%;
+.dropdown {
+  width: 30%;
   text-align: right;
 }
 
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.montserratFontFamily {
+  font-family: "Courier New", Courier, monospace;
 }
+
+.card-container {
+  width: 100%;
+  display: flex;
+}
+
+.cards {
+  width: 25%;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 13px 20px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+  box-sizing: border-box;
+  border-radius: 6px;
+  height: 64px;
+}
+
+.active-cards {
+  width: 25%;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 13px 20px;
+  height: 64px;
+  cursor: pointer;
+  border: 3px solid #007eff;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.card-text {
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 19px;
+line-height: 20px;
+color: black;
+}
+
+.active-card-text {
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 19px;
+line-height: 20px;
+color: #007eff;
+}
+
+.config-container {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.ml-30 {
+  margin-left: 40px;
+}
+
+.config-text {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+

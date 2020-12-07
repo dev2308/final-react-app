@@ -1,29 +1,34 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
-import { Tabs, Tab } from "react-bootstrap";
 import "./App.css";
-import ServerImageCard from "./components/Card";
-import RegionDropdown from "./components/RegionDropdown";
-import ImageCard from "./components/ImageCard";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { InputLabel, MenuItem, Select, Typography } from "@material-ui/core";
 import ConfigTabBar from "./components/ConfigTabBar";
 import CostEstimateCard from "./components/CostEstimateCard";
+import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      marginTop: 40,
+      marginTop: 21,
+      background: "#F4F5F8",
     },
     paper: {
       padding: theme.spacing(2),
       textAlign: "center",
       color: theme.palette.text.secondary,
     },
-    title: {},
+    title: {
+      fontFamily: "Montserrat",
+      fontStyle: "normal",
+      fontWeight: 600,
+      fontSize: "35px",
+      lineHeight: "54px",    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
   })
 );
 
@@ -56,35 +61,53 @@ function App() {
   const [imageDetails, setImageDetails] = useState([
     {
       id: 1,
-      imageTitle: "Linux Server 18.0",
-      description: "Description",
-      cost: 200,
+      imageTitle: "Linux 2 Image",
+      description: "Linux 2 comes with a 5 years of support. It provides Linux kernel 4.14 tuned for optimal performance",
+      cost: 243.61,
       chipOptions: ["64-bit(x86)", "64-bit(ARM)"],
+      isWindows: false,
     },
     {
       id: 2,
-      imageTitle: " Red Hat Enterprise Linux 8",
-      description: "Description",
-      cost: 243,
+      imageTitle: "Ubuntu Server 18.04 LTS",
+      description: "Linux 2 comes with a 5 years of support. It provides Linux kernel 4.14 tuned for optimal performance",
+      cost: 243.61,
       chipOptions: ["64-bit(x86)", "64-bit(ARM)"],
+      isWindows: false,
+
     },
     {
       id: 3,
-      imageTitle: "Linux Server 18.0",
-      description: "Description",
-      cost: 189,
+      imageTitle: "Red Hat Enterprise Linux 8",
+      description: "Linux 2 comes with a 5 years of support. It provides Linux kernel 4.14 tuned for optimal performance",
+      cost: 300,
       chipOptions: ["64-bit(x86)", "64-bit(ARM)"],
+      isWindows: false,
+
     },
     {
       id: 4,
-      imageTitle: "Red Hat Enterprise Linux 8",
-      description: "Description",
-      cost: 213,
+      imageTitle: "Microsoft Windows Server 2019 Base ",
+      description: "Windows comes with a 4 years of support. It provides Windows kernel 6.14 tuned for optimal performance",
+      cost: 338.77,
+      chipOptions: [ "64-bit(ARM)"],
+      isWindows: true,
+
+    },
+    {
+      id: 5,
+      imageTitle: "SUSE Linux Enterprise Server",
+      description: "Linux 2 comes with a 5 years of support. It provides Linux kernel 4.14 tuned for optimal performance",
+      cost: 200.22,
       chipOptions: ["64-bit(x86)", "64-bit(ARM)"],
+      isWindows: false,
+
     },
   ]);
 
   const [totalEstimatedCost, setTotalEstimatedCost] = React.useState(0);
+
+  const [selectedImage, setSelectedImage] = React.useState({});
 
   const [region, setRegion] = React.useState("");
   const onRegionChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -96,43 +119,51 @@ function App() {
     setSelectedChipType((event.target as HTMLInputElement).value);
   };
 
+  function costEstimator(data :any){
+    debugger
+  }
+
   return (
     <div className="App">
       <header className="App-header">HVC</header>
 
       <div className={classes.root}>
-        <Grid container spacing={2} justify="space-between">
+        <Grid container xs={12} spacing={2} justify="space-between">
           <Grid container xs={9}>
             <Grid container>
               <Grid item xs={6}>
                 <Typography className={classes.title}>Choose Image</Typography>
               </Grid>
-              <Grid item xs={6} alignContent="flex-end">
-                <InputLabel id="demo-simple-select-outlined-label">
-                  Region
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-outlined-label"
-                  id="demo-simple-select-outlined"
-                  value={region}
-                  onChange={onRegionChange}
-                  label="Age"
-                >
-                  <MenuItem value={"us-east-1"}>us-east-1</MenuItem>
-                  <MenuItem value={"us-east-2"}>us-east-2</MenuItem>
-                  <MenuItem value={"ap-south-1"}>ap-south-1</MenuItem>
-                </Select>
+              <Grid item xs={6} alignItems= "flex-end" alignContent="flex-end">
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Region
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    value={region}
+                    onChange={onRegionChange}
+                    label="Region"
+                  >
+                    <MenuItem value={"us-east-1"}>us-east-1</MenuItem>
+                    <MenuItem value={"us-east-2"}>us-east-2</MenuItem>
+                    <MenuItem value={"ap-south-1"}>ap-south-1</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
 
             <ConfigTabBar
               onChipTypeChange={onChipTypeChange}
               imageDetails={imageDetails}
+              region={region}
+              costEstimator={costEstimator}
             />
           </Grid>
 
           <Grid container xs={3}>
-            <CostEstimateCard />
+            <CostEstimateCard totalEstimatedCost={totalEstimatedCost}/>
           </Grid>
         </Grid>
       </div>
